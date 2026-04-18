@@ -1,0 +1,43 @@
+[build]
+  publish = "."
+
+[functions]
+  directory = "netlify/functions"
+
+# Headers for security and performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Cache static assets
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+
+# Short cache for HTML (news freshness)
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=600"
+
+# Redirect proxy.php calls to the serverless function
+[[redirects]]
+  from = "/proxy.php"
+  to = "/.netlify/functions/news-proxy"
+  status = 200
+  query = {endpoint = ":endpoint", q = ":q", pageSize = ":pageSize", category = ":category", country = ":country"}

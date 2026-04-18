@@ -1,0 +1,7 @@
+# Files not needed in production
+server.py
+START_SERVER.bat
+proxy.php
+worldpulsenew-deploy.zip
+.htaccess
+*.md

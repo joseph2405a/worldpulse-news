@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ═══ SEO PRIMARY ═══ -->
+  <title>WorldPulse News — Breaking Global News: Wars, Bitcoin, Trade & Politics</title>
+  <meta name="description" content="Stay informed with WorldPulse News – real-time breaking news on global conflicts, Bitcoin & crypto markets, US tariffs, trade wars, Trump, geopolitics, and world economy. Updated daily by AI.">
+  <meta name="keywords" content="world news, breaking news, war Ukraine Russia, Israel Gaza conflict, Bitcoin price, cryptocurrency, Trump tariffs, trade war, global economy, geopolitics, international news, noticias mundiales">
+  <meta name="author" content="WorldPulse News">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <link rel="canonical" href="https://worldpulsenew.com/">
+
+  <!-- ═══ OPEN GRAPH ═══ -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="WorldPulse News">
+  <meta property="og:title" content="WorldPulse News — Breaking Global News Updated Daily">
+  <meta property="og:description" content="Real-time breaking news on global conflicts, Bitcoin, US tariffs, trade wars, and world politics. AI-powered updates 24/7.">
+  <meta property="og:image" content="assets/logo.png">
+  <meta property="og:url" content="https://worldpulsenew.com/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="es_ES">
+
+  <!-- ═══ TWITTER CARD ═══ -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@WorldPulseNews">
+  <meta name="twitter:title" content="WorldPulse News — Breaking Global News">
+  <meta name="twitter:description" content="AI-curated global news: wars, Bitcoin, tariffs, politics, economy. Updated daily.">
+  <meta name="twitter:image" content="assets/logo.png">
+
+  <!-- ═══ SCHEMA.ORG ═══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "NewsMediaOrganization",
+    "name": "WorldPulse News",
+    "url": "https://worldpulsenew.com",
+    "logo": "https://worldpulsenew.com/assets/logo.png",
+    "sameAs": [
+      "https://twitter.com/WorldPulseNews",
+      "https://facebook.com/WorldPulseNews",
+      "https://youtube.com/WorldPulseNews"
+    ],
+    "description": "AI-powered global news covering wars, Bitcoin, tariffs, trade, and international politics.",
+    "foundingDate": "2025"
+  }
+  </script>
+
+  <!-- ═══ GOOGLE FONTS ═══ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Merriweather:ital,wght@0,400;0,700;1,400&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- ═══ ICONS ═══ -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- ═══ STYLES ═══ -->
+  <link rel="stylesheet" href="css/main.css">
+
+  <!-- ═══ GOOGLE ADS (AdSense) ═══ -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5434885258065242" crossorigin="anonymous"></script>
+
+  <!-- Preload critical assets -->
+  <link rel="preload" href="assets/logo.png" as="image">
+</head>
+
+<body>
+  <!-- ═══════════════════════════════════
+       TOP BAR
+  ═══════════════════════════════════ -->
+  <div class="top-bar" role="banner">
+    <div class="container">
+      <div class="top-bar-inner">
+        <div class="top-bar-left">
+          <span class="top-bar-date" id="topBarDate">Loading date...</span>
+          <span class="top-bar-temp" id="topBarMarket">
+            <i class="fa-brands fa-bitcoin"></i>
+            <span id="btcPrice">Loading BTC...</span>
+          </span>
+          <div class="agent-status-bar" id="agentStatusBar" title="AI News Agent Status">
+            <span class="agent-dot"></span>
+            <span id="agentStatusText">AI Agent Active</span>
+          </div>
+        </div>
+        <div class="top-bar-right">
+          <a href="https://twitter.com/WorldPulseNews" class="social-link" aria-label="Twitter" target="_blank" rel="noopener">
+            <i class="fa-brands fa-x-twitter"></i>
+          </a>
+          <a href="https://facebook.com/WorldPulseNews" class="social-link" aria-label="Facebook" target="_blank" rel="noopener">
+            <i class="fa-brands fa-facebook-f"></i>
+          </a>
+          <a href="https://youtube.com/@WorldPulseNews" class="social-link" aria-label="YouTube" target="_blank" rel="noopener">
+            <i class="fa-brands fa-youtube"></i>
+          </a>
+          <a href="https://t.me/WorldPulseNews" class="social-link" aria-label="Telegram" target="_blank" rel="noopener">
+            <i class="fa-brands fa-telegram"></i>
+          </a>
+          <div class="lang-toggle" role="group" aria-label="Language selector">
+            <button class="lang-btn active" id="langEN" onclick="setLanguage('en')" aria-pressed="true">EN</button>
+            <button class="lang-btn" id="langES" onclick="setLanguage('es')" aria-pressed="false">ES</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════
+       HEADER & NAVIGATION
+  ═══════════════════════════════════ -->
+  <header class="site-header" role="navigation" aria-label="Main navigation">
+    <div class="container">
+      <div class="header-inner">
+        <!-- Logo -->
+        <a href="index.html" class="site-logo" aria-label="WorldPulse News - Home">
+          <img src="assets/logo.png" alt="WorldPulse News Logo" class="logo-img" width="44" height="44">
+          <div class="logo-text">
+            <span class="logo-name">World<span>Pulse</span></span>
+            <span class="logo-tagline">Global News Network</span>
+          </div>
+        </a>
+
+        <!-- Navigation -->
+        <nav class="main-nav" aria-label="Category navigation">
+          <ul class="nav-list" role="list">
+            <li class="nav-item"><a href="#wars" class="nav-link active" id="nav-war"><i class="fa-solid fa-burst nav-icon"></i><span data-en="Wars" data-es="Guerras">Wars</span></a></li>
+            <li class="nav-item"><a href="#bitcoin" class="nav-link" id="nav-btc"><i class="fa-brands fa-bitcoin nav-icon"></i><span data-en="Bitcoin" data-es="Bitcoin">Bitcoin</span></a></li>
+            <li class="nav-item"><a href="#trade" class="nav-link" id="nav-trade"><i class="fa-solid fa-ship nav-icon"></i><span data-en="Trade" data-es="Comercio">Trade</span></a></li>
+            <li class="nav-item"><a href="#politics" class="nav-link" id="nav-pol"><i class="fa-solid fa-landmark nav-icon"></i><span data-en="Politics" data-es="Política">Politics</span></a></li>
+            <li class="nav-item"><a href="#economy" class="nav-link" id="nav-eco"><i class="fa-solid fa-chart-line nav-icon"></i><span data-en="Economy" data-es="Economía">Economy</span></a></li>
+            <li class="nav-item"><a href="dashboard.html" class="nav-link" id="nav-dash"><i class="fa-solid fa-gauge-high nav-icon"></i><span data-en="Dashboard" data-es="Dashboard">Dashboard</span></a></li>
+            <li class="nav-item"><a href="agent.html" class="nav-link" id="nav-agent" style="color:var(--accent-green)"><i class="fa-solid fa-robot nav-icon"></i><span data-en="AI Agent" data-es="Agente IA">AI Agent</span></a></li>
+          </ul>
+        </nav>
+
+        <!-- Search -->
+        <div class="header-search" role="search">
+          <input type="text" class="search-input" id="mainSearch" placeholder="Search news..." aria-label="Search news" autocomplete="off">
+          <button class="search-btn" aria-label="Submit search" onclick="handleSearch()">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════
+       BREAKING NEWS TICKER
+  ═══════════════════════════════════ -->
+  <div class="breaking-bar" role="marquee" aria-live="polite" aria-label="Breaking news ticker">
+    <div class="container">
+      <div class="breaking-inner">
+        <div class="breaking-label">
+          <span class="breaking-pulse"></span>
+          <span data-en="BREAKING" data-es="ÚLTIMA HORA">BREAKING</span>
+        </div>
+        <div class="ticker-wrap">
+          <div class="ticker-content" id="tickerContent">
+            <!-- Filled by JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════
+       ADS: LEADERBOARD (728x90)
+  ═══════════════════════════════════ -->
+  <div class="ad-leaderboard">
+    <div class="container">
+      <!-- Replace with actual AdSense code:
+      <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px"
+           data-ad-client="ca-pub-XXXXXXXXXX" data-ad-slot="XXXXXXXXXX"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      -->
+      <div class="ad-slot ad-leaderboard-slot" id="ad-leaderboard-1">
+        <span>Advertisement — 728×90</span>
+      </div>
+      <div class="ad-slot ad-mobile-slot" id="ad-mobile-1">
+        <span>Ad — 320×50</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════
+       LIVE MARKETS BAR
+  ═══════════════════════════════════ -->
+  <div class="container">
+    <div class="markets-bar" id="marketsBar" aria-label="Live market data">
+      <div class="markets-title"><i class="fa-solid fa-chart-line"></i> Live Markets</div>
+      <div class="markets-grid" id="marketsGrid">
+        <div class="market-item" id="mkt-btc">
+          <span class="market-name">Bitcoin</span>
+          <span class="market-price" id="mkt-btc-price">$84,250</span>
+          <span class="market-change up" id="mkt-btc-change">▲ +2.14%</span>
+        </div>
+        <div class="market-item" id="mkt-gold">
+          <span class="market-name">Gold (oz)</span>
+          <span class="market-price" id="mkt-gold-price">$3,327</span>
+          <span class="market-change up" id="mkt-gold-change">▲ +0.87%</span>
+        </div>
+        <div class="market-item" id="mkt-oil">
+          <span class="market-name">Crude Oil</span>
+          <span class="market-price" id="mkt-oil-price">$62.40</span>
+          <span class="market-change down" id="mkt-oil-change">▼ -1.23%</span>
+        </div>
+        <div class="market-item" id="mkt-sp">
+          <span class="market-name">S&P 500</span>
+          <span class="market-price" id="mkt-sp-price">5,282</span>
+          <span class="market-change down" id="mkt-sp-change">▼ -0.56%</span>
+        </div>
+        <div class="market-item" id="mkt-eth">
+          <span class="market-name">Ethereum</span>
+          <span class="market-price" id="mkt-eth-price">$1,584</span>
+          <span class="market-change up" id="mkt-eth-change">▲ +3.42%</span>
+        </div>
+        <div class="market-item" id="mkt-eur">
+          <span class="market-name">EUR/USD</span>
+          <span class="market-price" id="mkt-eur-price">1.1380</span>
+          <span class="market-change up" id="mkt-eur-change">▲ +0.21%</span>
+        </div>
+        <div class="market-item" id="mkt-dxy">
+          <span class="market-name">DXY (Dollar)</span>
+          <span class="market-price" id="mkt-dxy-price">99.21</span>
+          <span class="market-change down" id="mkt-dxy-change">▼ -0.33%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════
+       MAIN CONTENT
+  ═══════════════════════════════════ -->
+  <main class="main-content" id="main-content" role="main">
+    <div class="container">
+      <div class="content-grid">
+
+        <!-- ── LEFT COLUMN ── -->
+        <div class="main-col">
+
+          <!-- HERO SECTION -->
+          <section class="hero-section" aria-labelledby="hero-heading">
+            <h1 id="hero-heading" class="sr-only">WorldPulse News — Top Stories Today</h1>
+            <div class="hero-grid" id="heroGrid">
+
+              <!-- Hero Featured Article -->
+              <article class="hero-featured" id="heroFeatured" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="hero-img-wrap">
+                  <img class="hero-img" id="heroImg" src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&q=80" alt="Featured news" loading="eager" width="800" height="450">
+                </div>
+                <div class="hero-content">
+                  <div class="article-category cat-war" id="heroCat">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    <span data-en="Global Conflict" data-es="Conflicto Global">Global Conflict</span>
+                  </div>
+                  <h2 class="hero-title" id="heroTitle" itemprop="headline">Loading top story...</h2>
+                  <p class="hero-excerpt" id="heroExcerpt" itemprop="description">Fetching latest breaking news from global sources...</p>
+                  <div class="article-meta">
+                    <span class="source" id="heroSource" itemprop="publisher">WorldPulse AI</span>
+                    <span class="time-ago"><i class="fa-regular fa-clock"></i><span id="heroTime">Just now</span></span>
+                    <span><i class="fa-solid fa-eye"></i> <span id="heroViews">–</span></span>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Hero Side: Video + Mini Articles -->
+              <div class="hero-side">
+                <!-- Featured Video (thumbnail+play — never fails) -->
+                <div class="hero-video-card">
+                  <a class="video-thumb-link" id="heroVideoLink" href="https://www.youtube.com/results?search_query=ukraine+war+2025+news" target="_blank" rel="noopener noreferrer" aria-label="Watch featured news video on YouTube">
+                    <div class="video-thumb-hero" id="heroVideoThumb" style="background-image:url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&q=80')">
+                      <div class="video-play-btn"><i class="fa-brands fa-youtube"></i></div>
+                      <div class="video-duration-badge">LIVE</div>
+                    </div>
+                  </a>
+                  <div class="video-info">
+                    <p class="video-title" id="heroVideoTitle">Ukraine War: NATO Response & Latest Frontline Updates</p>
+                    <div class="video-source">
+                      <i class="fa-brands fa-youtube" style="color:#e53e3e"></i>
+                      <span>Watch on YouTube</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Mini Articles -->
+                <div class="hero-mini-articles" id="heroMiniArticles">
+                  <div class="mini-article skeleton" style="height:80px;"></div>
+                  <div class="mini-article skeleton" style="height:80px;"></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ──────────────────────────────
+               SECTION: WARS & CONFLICTS
+          ────────────────────────────── -->
+          <section class="news-section" id="wars" aria-labelledby="section-war-heading">
+            <div class="section-header">
+              <h2 class="section-title" id="section-war-heading">
+                <span class="section-icon">💥</span>
+                <span data-en="Wars & Conflicts" data-es="Guerras y Conflictos">Wars & Conflicts</span>
+              </h2>
+              <a href="#wars" class="view-all-link">
+                <span data-en="All Stories" data-es="Ver todo">All Stories</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
+            <div class="news-grid-3" id="warNewsGrid">
+              <div class="news-card skeleton" style="height:300px;"></div>
+              <div class="news-card skeleton" style="height:300px;"></div>
+              <div class="news-card skeleton" style="height:300px;"></div>
+            </div>
+          </section>
+
+          <!-- AD BILLBOARD -->
+          <div class="ad-between-sections">
+            <!-- AdSense:
+            <ins class="adsbygoogle" style="display:inline-block;width:970px;height:90px"
+                 data-ad-client="ca-pub-XXXXXXXXXX" data-ad-slot="XXXXXXXXXX"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            -->
+            <div class="ad-slot ad-billboard-slot" id="ad-billboard-1"><span>Advertisement — 970×90</span></div>
+          </div>
+
+          <!-- ──────────────────────────────
+               SECTION: BITCOIN & CRYPTO
+          ────────────────────────────── -->
+          <section class="news-section" id="bitcoin" aria-labelledby="section-btc-heading">
+            <div class="section-header">
+              <h2 class="section-title" id="section-btc-heading">
+                <span class="section-icon">₿</span>
+                <span data-en="Bitcoin & Crypto" data-es="Bitcoin y Cripto">Bitcoin & Crypto</span>
+              </h2>
+              <a href="#bitcoin" class="view-all-link">
+                <span data-en="All Stories" data-es="Ver todo">All Stories</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
+            <div class="news-grid-3" id="bitcoinNewsGrid">
+              <div class="news-card skeleton" style="height:300px;"></div>
+              <div class="news-card skeleton" style="height:300px;"></div>
+              <div class="news-card skeleton" style="height:300px;"></div>
+            </div>
+          </section>
+
+          <!-- ──────────────────────────────
+               SECTION: VIDEOS
+          ────────────────────────────── -->
+          <section class="videos-section" id="videos" aria-labelledby="section-video-heading">
+            <div class="section-header">
+              <h2 class="section-title" id="section-video-heading">
+                <span class="section-icon">🎬</span>
+                <span data-en="Must-Watch Videos" data-es="Videos Imprescindibles">Must-Watch Videos</span>
+              </h2>
+            </div>
+            <div class="videos-grid" id="videosGrid">
+
+              <!-- Video 1: US-China Trade War -->
+              <div class="video-card">
+                <a class="video-thumb-link" href="https://www.youtube.com/results?search_query=trump+china+tariffs+2025+news" target="_blank" rel="noopener noreferrer">
+                  <div class="video-thumb-img" style="background-image:url('https://images.unsplash.com/photo-1578574577315-3fbeb0cecdc2?w=600&q=80')">
+                    <div class="video-play-btn"><i class="fa-brands fa-youtube"></i></div>
+                    <span class="video-badge-cat cat-trade">🚢 TRADE</span>
+                  </div>
+                </a>
+                <div class="video-card-body">
+                  <div class="video-card-category"><span class="article-category cat-trade">🚢 Trade</span></div>
+                  <p class="video-card-title" data-en="US-China Trade War: Tariffs, Sanctions & What Comes Next" data-es="Guerra comercial EEUU-China: Aranceles, sanciones y qué sigue">US-China Trade War: Tariffs, Sanctions & What Comes Next</p>
+                  <div class="video-card-meta"><i class="fa-brands fa-youtube" style="color:#e53e3e"></i> CNBC &nbsp;|&nbsp; <i class="fa-regular fa-clock"></i> 2h ago</div>
+                </div>
+              </div>
+
+              <!-- Video 2: Ukraine War -->
+              <div class="video-card">
+                <a class="video-thumb-link" href="https://www.youtube.com/results?search_query=ukraine+war+nato+2025" target="_blank" rel="noopener noreferrer">
+                  <div class="video-thumb-img" style="background-image:url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&q=80')">
+                    <div class="video-play-btn"><i class="fa-brands fa-youtube"></i></div>
+                    <span class="video-badge-cat cat-war">💥 WAR</span>
+                  </div>
+                </a>
+                <div class="video-card-body">
+                  <div class="video-card-category"><span class="article-category cat-war">💥 Conflict</span></div>
+                  <p class="video-card-title" data-en="Ukraine War: NATO Response & Frontline Situation" data-es="Guerra Ucrania: Respuesta OTAN y situación del frente">Ukraine War: NATO Response & Frontline Situation</p>
+                  <div class="video-card-meta"><i class="fa-brands fa-youtube" style="color:#e53e3e"></i> BBC News &nbsp;|&nbsp; <i class="fa-regular fa-clock"></i> 4h ago</div>
+                </div>
+              </div>
+
+              <!-- Video 3: Bitcoin 2025 -->
+              <div class="video-card">
+                <a class="video-thumb-link" href="https://www.youtube.com/results?search_query=bitcoin+price+2025+analysis" target="_blank" rel="noopener noreferrer">
+                  <div class="video-thumb-img" style="background-image:url('https://images.unsplash.com/photo-1518544801976-3e159e50e5bb?w=600&q=80')">
+                    <div class="video-play-btn"><i class="fa-brands fa-youtube"></i></div>
+                    <span class="video-badge-cat cat-bitcoin">₿ BITCOIN</span>
+                  </div>
+                </a>
+                <div class="video-card-body">
+                  <div class="video-card-category"><span class="article-category cat-bitcoin">₿ Bitcoin</span></div>
+                  <p class="video-card-title" data-en="Bitcoin 2025: Why Institutions Are All In" data-es="Bitcoin 2025: Por qué las instituciones están 100% dentro">Bitcoin 2025: Why Institutions Are All In</p>
+                  <div class="video-card-meta"><i class="fa-brands fa-youtube" style="color:#e53e3e"></i> Bloomberg &nbsp;|&nbsp; <i class="fa-regular fa-clock"></i> 6h ago</div>
+                </div>
+              </div>
+
+            </div>
+          </section>
+
+          <!-- ──────────────────────────────
+               SECTION: TRADE & TARIFFS
+          ────────────────────────────── -->
+          <section class="news-section" id="trade" aria-labelledby="section-trade-heading">
+            <div class="section-header">
+              <h2 class="section-title" id="section-trade-heading">
+                <span class="section-icon">🚢</span>
+                <span data-en="Tariffs & Trade Wars" data-es="Aranceles y Guerras Comerciales">Tariffs & Trade Wars</span>
+              </h2>
+              <a href="#trade" class="view-all-link">
+                <span data-en="All Stories" data-es="Ver todo">All Stories</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
+            <div class="news-grid-3" id="tradeNewsGrid">
+              <div class="news-card skeleton" style="height:300px;"></div>
+              <div class="news-card skeleton" style="height:300px;"></div>
+              <div class="news-card skeleton" style="height:300px;"></div>
+            </div>
+          </section>
+
+          <!-- AD BILLBOARD 2 -->
+          <div class="ad-between-sections">
+            <div class="ad-slot ad-billboard-slot" id="ad-billboard-2"><span>Advertisement — 970×90</span></div>
+          </div>
+
+          <!-- ──────────────────────────────
+               SECTION: POLITICS
+          ────────────────────────────── -->
+          <section class="news-section" id="politics" aria-labelledby="section-pol-heading">
+            <div class="section-header">
+              <h2 class="section-title" id="section-pol-heading">
+                <span class="section-icon">🏛️</span>
+                <span data-en="Global Politics" data-es="Política Global">Global Politics</span>
+              </h2>
+              <a href="#politics" class="view-all-link">
+                <span data-en="All Stories" data-es="Ver todo">All Stories</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
+            <div class="news-grid-4" id="politicsNewsGrid">
+              <div class="news-card skeleton" style="height:280px;"></div>
+              <div class="news-card skeleton" style="height:280px;"></div>
+              <div class="news-card skeleton" style="height:280px;"></div>
+              <div class="news-card skeleton" style="height:280px;"></div>
+            </div>
+          </section>
+
+          <!-- ──────────────────────────────
+               SECTION: ECONOMY
+          ────────────────────────────── -->
+          <section class="news-section" id="economy" aria-labelledby="section-eco-heading">
+            <div class="section-header">
+              <h2 class="section-title" id="section-eco-heading">
+                <span class="section-icon">💹</span>
+                <span data-en="World Economy" data-es="Economía Mundial">World Economy</span>
+              </h2>
+              <a href="#economy" class="view-all-link">
+                <span data-en="All Stories" data-es="Ver todo">All Stories</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
+            <div class="news-grid-3" id="economyNewsGrid">
+              <div class="news-card skeleton" style="height:300px;"></div>
+              <div class="news-card skeleton" style="height:300px;"></div>
+              <div class="news-card skeleton" style="height:300px;"></div>
+            </div>
+          </section>
+
+          <!-- LOAD MORE BUTTON -->
+          <button class="btn-load-more" id="loadMoreBtn" onclick="loadMoreNews()" aria-label="Load more news">
+            <i class="fa-solid fa-rotate"></i>
+            <span data-en="Load More Stories" data-es="Cargar más noticias">Load More Stories</span>
+          </button>
+
+          <!-- NEWSLETTER BANNER -->
+          <div class="newsletter-banner" aria-labelledby="newsletter-heading">
+            <h2 id="newsletter-heading">
+              <span data-en="Never Miss a" data-es="Nunca te pierdas un">Never Miss a</span>
+              <span> </span>
+              <span data-en="Breaking Story" data-es="Artículo de última hora" style="color:var(--accent-red)">Breaking Story</span>
+            </h2>
+            <p data-en="Get AI-curated global news delivered to your inbox every morning. War updates, Bitcoin alerts, trade war developments and more." data-es="Recibe noticias globales curadas por IA en tu bandeja de entrada cada mañana. Actualizaciones de guerras, alertas de Bitcoin, desarrollos de guerras comerciales y más.">
+              Get AI-curated global news delivered to your inbox every morning. War updates, Bitcoin alerts, trade war developments and more.
+            </p>
+            <form class="newsletter-banner-form" onsubmit="handleNewsletterSignup(event)" novalidate>
+              <input type="email" id="bannerEmail" placeholder="Enter your email address..." aria-label="Email address for newsletter" required>
+              <button type="submit" class="btn-subscribe" data-en="Subscribe Free" data-es="Suscribirse gratis">Subscribe Free</button>
+            </form>
+          </div>
+
+        </div><!-- end main-col -->
+
+        <!-- ── SIDEBAR ── -->
+        <aside class="sidebar" aria-label="News sidebar">
+
+          <!-- AD: Rectangle 300x250 -->
+          <div class="sidebar-widget" style="padding:10px;text-align:center;">
+            <!-- AdSense:
+            <ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px"
+                 data-ad-client="ca-pub-XXXXXXXXXX" data-ad-slot="XXXXXXXXXX"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            -->
+            <div class="ad-slot ad-rectangle-slot" id="ad-rect-1"><span>Advertisement — 300×250</span></div>
+          </div>
+
+          <!-- TRENDING TOPICS -->
+          <div class="sidebar-widget" aria-labelledby="trending-heading">
+            <div class="widget-header" id="trending-heading">
+              <i class="fa-solid fa-fire" style="color:#f59e0b"></i>
+              <span data-en="Trending Now" data-es="Tendencia Ahora">Trending Now</span>
+            </div>
+            <div class="trending-list" id="trendingList">
+              <div class="trending-item">
+                <span class="trending-num">01</span>
+                <div class="trending-content">
+                  <p class="trending-title skeleton" style="height:14px;width:80%;margin-bottom:4px;border-radius:3px;"></p>
+                  <p class="trending-meta skeleton" style="height:10px;width:40%;border-radius:3px;"></p>
+                </div>
+              </div>
+              <div class="trending-item">
+                <span class="trending-num">02</span>
+                <div class="trending-content">
+                  <p class="trending-title skeleton" style="height:14px;width:80%;margin-bottom:4px;border-radius:3px;"></p>
+                  <p class="trending-meta skeleton" style="height:10px;width:40%;border-radius:3px;"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SOCIAL STATS -->
+          <div class="sidebar-widget" aria-labelledby="social-heading">
+            <div class="widget-header" id="social-heading">
+              <i class="fa-solid fa-users"></i>
+              <span data-en="Our Community" data-es="Nuestra Comunidad">Our Community</span>
+            </div>
+            <div class="social-stats">
+              <div class="social-stat-item">
+                <div class="social-stat-left"><i class="fa-brands fa-x-twitter"></i> Twitter</div>
+                <span class="social-count" id="twFollowers">24.5K</span>
+              </div>
+              <div class="social-stat-item">
+                <div class="social-stat-left"><i class="fa-brands fa-facebook-f" style="color:#3b82f6"></i> Facebook</div>
+                <span class="social-count" id="fbFollowers">61.2K</span>
+              </div>
+              <div class="social-stat-item">
+                <div class="social-stat-left"><i class="fa-brands fa-youtube" style="color:#e53e3e"></i> YouTube</div>
+                <span class="social-count" id="ytFollowers">12.8K</span>
+              </div>
+              <div class="social-stat-item">
+                <div class="social-stat-left"><i class="fa-brands fa-telegram" style="color:#3b82f6"></i> Telegram</div>
+                <span class="social-count" id="tgFollowers">8.4K</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- AD: Half Page 300x600 -->
+          <div class="sidebar-widget" style="padding:10px;text-align:center;">
+            <!-- AdSense:
+            <ins class="adsbygoogle" style="display:inline-block;width:300px;height:600px"
+                 data-ad-client="ca-pub-XXXXXXXXXX" data-ad-slot="XXXXXXXXXX"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            -->
+            <div class="ad-slot ad-halfpage-slot" id="ad-halfpage-1"><span>Advertisement — 300×600</span></div>
+          </div>
+
+          <!-- NEWSLETTER SIGNUP -->
+          <div class="sidebar-widget" aria-labelledby="newsletter-widget-heading">
+            <div class="widget-header" id="newsletter-widget-heading">
+              <i class="fa-solid fa-envelope"></i>
+              <span data-en="Daily Briefing" data-es="Boletín Diario">Daily Briefing</span>
+            </div>
+            <div class="newsletter-widget">
+              <p data-en="Get the top 5 global stories every morning." data-es="Recibe las 5 noticias globales más importantes cada mañana.">Get the top 5 global stories every morning.</p>
+              <form class="newsletter-form" onsubmit="handleNewsletterSignup(event)" novalidate>
+                <input type="email" id="sidebarEmail" class="newsletter-input" placeholder="your@email.com" aria-label="Email for newsletter" required>
+                <button type="submit" class="btn-primary" data-en="Get Free Briefing" data-es="Recibir boletín gratis">Get Free Briefing</button>
+              </form>
+            </div>
+          </div>
+
+        </aside><!-- end sidebar -->
+
+      </div><!-- end content-grid -->
+    </div><!-- end container -->
+  </main>
+
+  <!-- ═══════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════ -->
+  <footer class="site-footer" role="contentinfo" aria-label="Site footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="site-logo footer-logo" aria-label="WorldPulse News">
+            <img src="assets/logo.png" alt="WorldPulse News" class="logo-img" width="36" height="36">
+            <div class="logo-text">
+              <span class="logo-name">World<span>Pulse</span></span>
+              <span class="logo-tagline">Global News Network</span>
+            </div>
+          </a>
+          <p class="footer-desc" data-en="WorldPulse News is an AI-powered global news portal delivering real-time updates on wars, geopolitics, Bitcoin, trade, and world economy. Available in English and Spanish." data-es="WorldPulse News es un portal de noticias globales potenciado por IA que entrega actualizaciones en tiempo real sobre guerras, geopolítica, Bitcoin, comercio y economía mundial.">
+            WorldPulse News is an AI-powered global news portal delivering real-time updates on wars, geopolitics, Bitcoin, trade, and world economy. Available in English and Spanish.
+          </p>
+          <div class="footer-social">
+            <a href="#" class="footer-social-link" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#" class="footer-social-link" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="footer-social-link" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#" class="footer-social-link" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+            <a href="#" class="footer-social-link" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 data-en="Top Categories" data-es="Categorías Principales">Top Categories</h4>
+          <ul class="footer-links">
+            <li><a href="#wars" class="footer-link"><i class="fa-solid fa-angle-right"></i><span data-en="Wars & Conflicts" data-es="Guerras y Conflictos">Wars & Conflicts</span></a></li>
+            <li><a href="#bitcoin" class="footer-link"><i class="fa-solid fa-angle-right"></i><span data-en="Bitcoin & Crypto" data-es="Bitcoin y Cripto">Bitcoin & Crypto</span></a></li>
+            <li><a href="#trade" class="footer-link"><i class="fa-solid fa-angle-right"></i><span data-en="Tariffs & Trade" data-es="Aranceles y Comercio">Tariffs & Trade</span></a></li>
+            <li><a href="#politics" class="footer-link"><i class="fa-solid fa-angle-right"></i><span data-en="Global Politics" data-es="Política Global">Global Politics</span></a></li>
+            <li><a href="#economy" class="footer-link"><i class="fa-solid fa-angle-right"></i><span data-en="World Economy" data-es="Economía Mundial">World Economy</span></a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 data-en="Top Keywords" data-es="Palabras Clave">Top Keywords</h4>
+          <ul class="footer-links">
+            <li><a href="#wars" class="footer-link"><i class="fa-solid fa-angle-right"></i>Ukraine Russia War 2025</a></li>
+            <li><a href="#wars" class="footer-link"><i class="fa-solid fa-angle-right"></i>Israel Gaza Conflict</a></li>
+            <li><a href="#bitcoin" class="footer-link"><i class="fa-solid fa-angle-right"></i>Bitcoin Price Today</a></li>
+            <li><a href="#trade" class="footer-link"><i class="fa-solid fa-angle-right"></i>Trump Tariffs China</a></li>
+            <li><a href="#economy" class="footer-link"><i class="fa-solid fa-angle-right"></i>US Inflation 2025</a></li>
+            <li><a href="#politics" class="footer-link"><i class="fa-solid fa-angle-right"></i>NATO News</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 data-en="Quick Links" data-es="Accesos Rápidos">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="dashboard.html" class="footer-link"><i class="fa-solid fa-angle-right"></i><span data-en="Analytics Dashboard" data-es="Dashboard Analytics">Analytics Dashboard</span></a></li>
+            <li><a href="agent.html" class="footer-link"><i class="fa-solid fa-angle-right"></i><span data-en="AI Agent Monitor" data-es="Monitor Agente IA">AI Agent Monitor</span></a></li>
+            <li><a href="#" class="footer-link"><i class="fa-solid fa-angle-right"></i><span data-en="About Us" data-es="Sobre Nosotros">About Us</span></a></li>
+            <li><a href="#" class="footer-link"><i class="fa-solid fa-angle-right"></i><span data-en="Contact" data-es="Contacto">Contact</span></a></li>
+            <li><a href="#" class="footer-link"><i class="fa-solid fa-angle-right"></i><span data-en="Advertise With Us" data-es="Anuncia Con Nosotros">Advertise With Us</span></a></li>
+            <li><a href="#" class="footer-link"><i class="fa-solid fa-angle-right"></i><span data-en="Privacy Policy" data-es="Política de Privacidad">Privacy Policy</span></a></li>
+            <li><a href="#" class="footer-link"><i class="fa-solid fa-angle-right"></i><span data-en="RSS Feed" data-es="RSS">RSS Feed</span></a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>&copy; 2025 WorldPulse News. <span data-en="All rights reserved." data-es="Todos los derechos reservados.">All rights reserved.</span></span>
+        <span data-en="Powered by AI News Agent • Updated Daily" data-es="Impulsado por Agente IA • Actualizado Diariamente">Powered by AI News Agent • Updated Daily</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════
+       TOAST NOTIFICATION CONTAINER
+  ═══════════════════════════════════ -->
+  <div class="toast-container" id="toastContainer" aria-live="assertive" aria-atomic="true" role="status"></div>
+
+  <!-- ═══════════════════════════════════
+       SCRIPTS
+  ═══════════════════════════════════ -->
+  <script src="js/news-agent.js"></script>
+  <script src="js/seo.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>

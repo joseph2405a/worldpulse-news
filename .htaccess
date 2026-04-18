@@ -1,0 +1,83 @@
+# WorldPulse News — Hostinger Apache Configuration
+# =================================================
+
+# Force HTTPS
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Force www (optional — uncomment if you want www.worldpulsenew.com)
+# RewriteCond %{HTTP_HOST} ^worldpulsenew\.com [NC]
+# RewriteRule ^(.*)$ https://www.worldpulsenew.com/$1 [L,R=301]
+
+# GZIP Compression for faster loading
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html
+  AddOutputFilterByType DEFLATE text/css
+  AddOutputFilterByType DEFLATE text/javascript
+  AddOutputFilterByType DEFLATE application/javascript
+  AddOutputFilterByType DEFLATE application/json
+  AddOutputFilterByType DEFLATE application/xml
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# Browser Caching
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  # Images
+  ExpiresByType image/jpeg "access plus 1 month"
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType image/webp "access plus 1 month"
+  ExpiresByType image/svg+xml "access plus 1 month"
+  ExpiresByType image/gif "access plus 1 month"
+  ExpiresByType image/x-icon "access plus 1 year"
+
+  # CSS and JavaScript
+  ExpiresByType text/css "access plus 1 week"
+  ExpiresByType application/javascript "access plus 1 week"
+  ExpiresByType text/javascript "access plus 1 week"
+
+  # Fonts
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType font/woff "access plus 1 year"
+  ExpiresByType application/font-woff2 "access plus 1 year"
+
+  # HTML — short cache for news freshness
+  ExpiresByType text/html "access plus 10 minutes"
+
+  # JSON
+  ExpiresByType application/json "access plus 5 minutes"
+</IfModule>
+
+# Security Headers
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set X-XSS-Protection "1; mode=block"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+</IfModule>
+
+# Prevent directory browsing
+Options -Indexes
+
+# Custom error pages (optional)
+ErrorDocument 404 /index.html
+
+# Block access to sensitive files
+<FilesMatch "\.(py|bat|env|log|md)$">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+# Protect cache directory
+<IfModule mod_rewrite.c>
+  RewriteRule ^cache/ - [F,L]
+</IfModule>
+
+# MIME Types
+AddType application/javascript .js
+AddType text/css .css
+AddType application/json .json
+AddType application/xml .xml

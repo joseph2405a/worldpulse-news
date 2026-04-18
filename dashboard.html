@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analytics Dashboard — WorldPulse News</title>
+  <meta name="description" content="WorldPulse News analytics dashboard — track visitors, pageviews, ad revenue, CTR, top articles, and AI agent performance.">
+  <meta name="robots" content="noindex, nofollow">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+
+<body class="dashboard-page">
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-bar-inner">
+        <div class="top-bar-left">
+          <span class="top-bar-date" id="dashDate"></span>
+          <div class="agent-status-bar">
+            <span class="agent-dot"></span>
+            <span id="dashAgentStatus">AI Agent: All Systems Active</span>
+          </div>
+        </div>
+        <div class="top-bar-right">
+          <a href="index.html" style="font-size:12px;color:var(--accent-blue);font-weight:600;display:flex;align-items:center;gap:6px;">
+            <i class="fa-solid fa-globe"></i> View Live Site
+          </a>
+          <div class="lang-toggle">
+            <button class="lang-btn active" onclick="setDashLang('en')">EN</button>
+            <button class="lang-btn" onclick="setDashLang('es')">ES</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="index.html" class="site-logo">
+          <img src="assets/logo.png" alt="WorldPulse News" class="logo-img" width="44" height="44">
+          <div class="logo-text">
+            <span class="logo-name">World<span>Pulse</span></span>
+            <span class="logo-tagline">Analytics Dashboard</span>
+          </div>
+        </a>
+        <nav class="main-nav">
+          <ul class="nav-list">
+            <li><a href="index.html" class="nav-link"><i class="fa-solid fa-house nav-icon"></i>Home</a></li>
+            <li><a href="dashboard.html" class="nav-link active"><i class="fa-solid fa-gauge-high nav-icon"></i>Dashboard</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- DASHBOARD MAIN -->
+  <main class="main-content" id="main-content" role="main">
+    <div class="container">
+
+      <!-- Dashboard Header -->
+      <div class="dashboard-header">
+        <div>
+          <h1 class="dashboard-title">
+            <span class="dashboard-title-icon">📊</span>
+            <span id="dashTitle">Analytics Dashboard</span>
+          </h1>
+          <p class="dashboard-subtitle" id="dashSubtitle">Real-time performance metrics for WorldPulse News</p>
+        </div>
+        <div class="dashboard-actions">
+          <button class="btn-refresh" onclick="refreshDashboard()" id="refreshBtn">
+            <i class="fa-solid fa-rotate" id="refreshIcon"></i>
+            <span id="refreshLabel">Refresh Data</span>
+          </button>
+          <button class="btn-export" onclick="exportReport()">
+            <i class="fa-solid fa-download"></i>
+            <span id="exportLabel">Export Report</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Date Filters -->
+      <div class="date-filters" role="group" aria-label="Date range filter">
+        <button class="date-btn" onclick="setDateRange('1d', this)" id="filter-1d">Today</button>
+        <button class="date-btn active" onclick="setDateRange('7d', this)" id="filter-7d">7 Days</button>
+        <button class="date-btn" onclick="setDateRange('30d', this)" id="filter-30d">30 Days</button>
+        <button class="date-btn" onclick="setDateRange('90d', this)" id="filter-90d">90 Days</button>
+      </div>
+
+      <!-- STATS GRID -->
+      <div class="stats-grid" id="statsGrid">
+        <div class="stat-card visitors">
+          <div class="stat-header">
+            <div class="stat-icon"><i class="fa-solid fa-users" style="color:#3b82f6"></i></div>
+            <span class="stat-trend up" id="visitorsTrend">▲ +18.2%</span>
+          </div>
+          <div class="stat-value" id="visitorsValue">0</div>
+          <div class="stat-label" id="visitorsLabel">Unique Visitors</div>
+        </div>
+        <div class="stat-card pageviews">
+          <div class="stat-header">
+            <div class="stat-icon"><i class="fa-solid fa-eye" style="color:#10b981"></i></div>
+            <span class="stat-trend up" id="pageviewsTrend">▲ +24.6%</span>
+          </div>
+          <div class="stat-value" id="pageviewsValue">0</div>
+          <div class="stat-label" id="pageviewsLabel">Page Views</div>
+        </div>
+        <div class="stat-card revenue">
+          <div class="stat-header">
+            <div class="stat-icon"><i class="fa-solid fa-dollar-sign" style="color:#f59e0b"></i></div>
+            <span class="stat-trend up" id="revenueTrend">▲ +31.4%</span>
+          </div>
+          <div class="stat-value" id="revenueValue">$0</div>
+          <div class="stat-label" id="revenueLabel">Ad Revenue (Est.)</div>
+        </div>
+        <div class="stat-card ctr">
+          <div class="stat-header">
+            <div class="stat-icon"><i class="fa-solid fa-arrow-pointer" style="color:#e53e3e"></i></div>
+            <span class="stat-trend up" id="ctrTrend">▲ +5.3%</span>
+          </div>
+          <div class="stat-value" id="ctrValue">0%</div>
+          <div class="stat-label" id="ctrLabel">Ad Click-Through Rate</div>
+        </div>
+      </div>
+
+      <!-- CHARTS ROW 1: Traffic + Sources -->
+      <div class="charts-row">
+        <!-- Traffic Over Time -->
+        <div class="chart-card">
+          <div class="chart-header">
+            <div class="chart-title">
+              <i class="fa-solid fa-chart-line" style="color:#3b82f6"></i>
+              <span id="trafficChartTitle">Traffic Overview</span>
+            </div>
+            <span class="chart-badge" id="trafficChartBadge">Last 7 Days</span>
+          </div>
+          <div class="chart-canvas-wrap" style="height:240px;">
+            <canvas id="trafficChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Traffic Sources Pie -->
+        <div class="chart-card">
+          <div class="chart-header">
+            <div class="chart-title">
+              <i class="fa-solid fa-chart-pie" style="color:#8b5cf6"></i>
+              <span id="sourcesChartTitle">Traffic Sources</span>
+            </div>
+          </div>
+          <div class="chart-canvas-wrap" style="height:240px;">
+            <canvas id="sourcesChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- CHARTS ROW 2: Categories + Devices + Revenue -->
+      <div class="charts-row-3">
+        <!-- Category Performance -->
+        <div class="chart-card">
+          <div class="chart-header">
+            <div class="chart-title">
+              <i class="fa-solid fa-layer-group" style="color:#f59e0b"></i>
+              <span id="catChartTitle">Category Views</span>
+            </div>
+          </div>
+          <div class="chart-canvas-wrap" style="height:220px;">
+            <canvas id="categoryChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Device Breakdown -->
+        <div class="chart-card">
+          <div class="chart-header">
+            <div class="chart-title">
+              <i class="fa-solid fa-mobile-screen" style="color:#10b981"></i>
+              <span id="devicesChartTitle">Device Types</span>
+            </div>
+          </div>
+          <div class="chart-canvas-wrap" style="height:220px;">
+            <canvas id="devicesChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Ad Revenue by Day -->
+        <div class="chart-card">
+          <div class="chart-header">
+            <div class="chart-title">
+              <i class="fa-solid fa-money-bill-wave" style="color:#e53e3e"></i>
+              <span id="revenueChartTitle">Daily Revenue</span>
+            </div>
+          </div>
+          <div class="chart-canvas-wrap" style="height:220px;">
+            <canvas id="revenueChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI AGENT STATUS -->
+      <div class="agent-card">
+        <div class="agent-header">
+          <div class="agent-title">
+            <i class="fa-solid fa-robot" style="color:var(--accent-green)"></i>
+            <span id="agentCardTitle">AI News Agent — Status Monitor</span>
+          </div>
+          <div class="agent-live-badge">
+            <span class="agent-dot"></span>
+            <span id="agentLiveLabel">LIVE</span>
+          </div>
+        </div>
+        <div class="agent-stats-row">
+          <div class="agent-stat">
+            <div class="agent-stat-num" id="agentArticlesTotal">142</div>
+            <div class="agent-stat-label" id="agentTotalLabel">Articles Today</div>
+          </div>
+          <div class="agent-stat">
+            <div class="agent-stat-num" id="agentSources">6</div>
+            <div class="agent-stat-label" id="agentSourcesLabel">RSS Sources</div>
+          </div>
+          <div class="agent-stat">
+            <div class="agent-stat-num" id="agentLastUpdate">Just now</div>
+            <div class="agent-stat-label" id="agentUpdateLabel">Last Update</div>
+          </div>
+          <div class="agent-stat">
+            <div class="agent-stat-num" id="agentUptime">99.8%</div>
+            <div class="agent-stat-label" id="agentUptimeLabel">Uptime (30d)</div>
+          </div>
+          <div class="agent-stat">
+            <div class="agent-stat-num" id="agentNextUpdate">58m</div>
+            <div class="agent-stat-label" id="agentNextLabel">Next Update</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TOP ARTICLES TABLE + GEO SIDE BY SIDE -->
+      <div class="charts-row">
+        <!-- Top Articles -->
+        <div class="table-card">
+          <div class="table-header">
+            <div class="table-title">
+              <i class="fa-solid fa-newspaper" style="color:var(--accent-red)"></i>
+              <span id="topArticlesTitle">Top Performing Articles</span>
+            </div>
+            <span class="chart-badge" id="topArticlesBadge">Today</span>
+          </div>
+          <table class="data-table" id="articlesTable" aria-label="Top articles">
+            <thead>
+              <tr>
+                <th id="col-article">Article</th>
+                <th id="col-cat">Category</th>
+                <th id="col-views">Views</th>
+                <th id="col-time">Avg. Time</th>
+                <th id="col-ctr">Ad CTR</th>
+              </tr>
+            </thead>
+            <tbody id="articlesTableBody">
+              <!-- Filled by JS -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Geographic Distribution -->
+        <div class="geo-card">
+          <div class="chart-header">
+            <div class="chart-title">
+              <i class="fa-solid fa-earth-americas" style="color:#3b82f6"></i>
+              <span id="geoTitle">Top Countries</span>
+            </div>
+          </div>
+          <div class="country-list" id="countryList">
+            <!-- Filled by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- SEO METRICS -->
+      <div class="charts-row-3">
+        <div class="chart-card">
+          <div class="chart-header">
+            <div class="chart-title">
+              <i class="fa-solid fa-magnifying-glass" style="color:#8b5cf6"></i>
+              <span id="seoSearchTitle">Search Impressions</span>
+            </div>
+          </div>
+          <div class="chart-canvas-wrap" style="height:200px;">
+            <canvas id="impressionsChart"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-card">
+          <div class="chart-header">
+            <div class="chart-title">
+              <i class="fa-solid fa-tags" style="color:#f59e0b"></i>
+              <span id="keywordsTitle">Top Keywords</span>
+            </div>
+          </div>
+          <div style="padding-top:8px;" id="keywordsList">
+            <!-- Filled by JS -->
+          </div>
+        </div>
+
+        <div class="chart-card">
+          <div class="chart-header">
+            <div class="chart-title">
+              <i class="fa-solid fa-gauge" style="color:#10b981"></i>
+              <span id="perfTitle">Performance Score</span>
+            </div>
+          </div>
+          <div style="text-align:center;padding:16px 0;">
+            <canvas id="performanceGauge" width="200" height="120"></canvas>
+            <div style="margin-top:8px;font-size:13px;color:var(--text-muted)" id="perfSubtitle">Core Web Vitals</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end container -->
+  </main>
+
+  <!-- FOOTER -->
+  <footer style="background:var(--bg-secondary);border-top:1px solid var(--border);padding:16px 0;text-align:center;font-size:12px;color:var(--text-muted);">
+    <div class="container">
+      WorldPulse News Dashboard • Auto-refreshes every 5 minutes • <a href="index.html" style="color:var(--accent-blue)">← Back to News Site</a>
+    </div>
+  </footer>
+
+  <div class="toast-container" id="toastContainer" role="status" aria-live="polite"></div>
+
+  <script src="js/news-agent.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

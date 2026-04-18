@@ -1,0 +1,12 @@
+# Local dev files
+server.py
+START_SERVER.bat
+worldpulsenew-deploy.zip
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Cache
+cache/
